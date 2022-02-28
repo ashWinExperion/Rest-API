@@ -97,28 +97,7 @@ namespace ClinicManagementSystem.Controllers
             return BadRequest();
         }
 
-
-        [HttpPost("doctor")]
-
-        public async Task<int> AddDoctor([FromBody] AddDoctorView user)
-        {
-            return await _intrface.AddDoctor(user);
-        }
-
-
-        [HttpPut("doctors")]
-
-        public async Task UpdDoctor(AddDoctorView usr)
-        {
-            await _intrface.UpdDoctor(usr);
-        }
-
-        [HttpGet("doctors/{Id}")]
-        public async Task<AddDoctorView> GetDoctorDetailsByUserID(int id)
-        {
-            return await _intrface.GetDoctorDetailsByUserID(id);
-        }
-
+        //Delete A User...Status set to zero
         [HttpDelete("{id}")]
         public async Task DisableUser(int id)
         {

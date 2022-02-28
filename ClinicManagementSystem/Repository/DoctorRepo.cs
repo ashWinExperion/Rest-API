@@ -26,36 +26,108 @@ namespace ClinicManagementSystem.Repository
         }
 
 
-        //------------------Add Doctor--------------------------------------------------------------------------
-        public async Task<int> AddDoctor(Doctor doc)
+        //------------------Add Users(Doctor)--------------------------------------------------------------------------
+        public async Task<int> AddDoctor(AddDoctorView usr)
         {
             if (_db != null)
 
             {
-                await _db.Doctor.AddAsync(doc);
+
+                Users ur = new Users();
+                ur.FirstName = usr.FirstName;
+                ur.LastName = usr.LastName;
+                ur.RoleId = 2;
+                ur.JoinDate = new DateTime();
+                ur.UserDob = usr.UserDob;
+                ur.UserName = usr.UserName;
+                ur.Password = usr.Password;
+                ur.JoinDate = DateTime.Now;
+                ur.City = usr.City;
+                ur.State = usr.State;
+                ur.Gender = usr.Gender;
+                ur.Phone = usr.Phone;
+                ur.Status = 1;
+                await _db.Users.AddAsync(ur);
                 await _db.SaveChangesAsync();
-                return doc.DoctorId;
+
+                Doctor dr = new Doctor();
+                dr.SpecializationId = usr.Specialization;
+                dr.UserId = ur.UserId;
+                await _db.Doctor.AddAsync(dr);
+                await _db.SaveChangesAsync();
+
+                return dr.DoctorId;
             }
             return 0;
         }
 
-        //------------------Update Doctor--------------------------------------------------------------------------
-        public async Task UpdateDoctor(Doctor doc)
-        {
-            _db.Entry(doc).State = EntityState.Modified;
-            _db.Doctor.Update(doc);
-            await _db.SaveChangesAsync();
-        }
 
-        //------------------By Id------------------------------------------------------------------------------------
-        public async Task<Doctor> GetDoctorById(int id)
+
+        //--------------Update Doctor---------------------------------------------------------------
+        public async Task UpdDoctor(AddDoctorView usr)
         {
             if (_db != null)
+
             {
-                var result = await _db.Doctor.FindAsync(id);
-                return result;
+
+                Users ur = new Users();
+                ur.Status = 1;
+                ur.UserId = usr.UserId;
+                ur.FirstName = usr.FirstName;
+                ur.LastName = usr.LastName;
+                ur.RoleId = 2;
+                ur.JoinDate = new DateTime();
+                ur.UserDob = usr.UserDob;
+                ur.UserName = usr.UserName;
+                ur.Password = usr.Password;
+                ur.JoinDate = DateTime.Now;
+                ur.City = usr.City;
+                ur.State = usr.State;
+                ur.Gender = usr.Gender;
+                ur.Phone = usr.Phone;
+                _db.Entry(ur).State = EntityState.Modified;
+                _db.Users.Update(ur);
+                await _db.SaveChangesAsync();
+
+                Doctor dr = new Doctor();
+                dr.DoctorId = usr.DoctorId;
+                dr.SpecializationId = usr.Specialization;
+                dr.UserId = usr.UserId;
+                _db.Entry(dr).State = EntityState.Modified;
+                _db.Doctor.Update(dr);
+                await _db.SaveChangesAsync();
+
             }
-            return null;
+
+        }
+
+        //-------------Get Doctor Details By UserID------------------------------------------------
+        public async Task<AddDoctorView> GetDoctorDetailsByUserID(int id)
+        {
+            return await (from user in _db.Users
+                          join dr in _db.Doctor
+                          on user.UserId equals dr.UserId
+                          where user.UserId == id
+                          select new AddDoctorView
+                          {
+                              Status = (int)user.Status,
+                              UserId = user.UserId,
+                              DoctorId = dr.DoctorId,
+                              FirstName = user.FirstName,
+                              LastName = user.LastName,
+                              RoleId = user.RoleId,
+                              JoinDate = (DateTime)user.JoinDate,
+                              UserDob = (DateTime)user.UserDob,
+                              UserName = user.UserName,
+                              Password = user.Password,
+                              City = user.City,
+                              State = user.State,
+                              Gender = user.Gender,
+                              Phone = user.Phone,
+                              Specialization = (int)dr.SpecializationId
+                          }
+                   ).FirstOrDefaultAsync();
+
         }
 
         public async Task<List<AllDrSpView>> GetAllDrSp(int id)

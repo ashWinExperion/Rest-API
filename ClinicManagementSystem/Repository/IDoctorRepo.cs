@@ -11,11 +11,10 @@ namespace ClinicManagementSystem.Repository
     {
         Task<List<AllDrSpView>> GetAllDrSp(int id);
 
-        Task<int> AddDoctor(Doctor doc);
+        Task<AddDoctorView> GetDoctorDetailsByUserID(int id);
+        Task UpdDoctor(AddDoctorView usr);
 
-        Task UpdateDoctor(Doctor doc);
-
-        Task<Doctor> GetDoctorById(int a);
+        Task<int> AddDoctor(AddDoctorView usr);
         Task<List<Doctor>> GetAllDoctor();
     }
 }

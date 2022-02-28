@@ -37,35 +37,16 @@ namespace ClinicManagementSystem.Controllers
             return await _intrface.GetAllDoctor();
         }
 
-        //GET By Id
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Doctor>> GetDoctorById(int id)
-        {
-            try
-            {
-                var result = await _intrface.GetDoctorById(id);
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                return result; //return Ok(employee)
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-        }
-
-
+        
         //Add Doctor
         [HttpPost]
-        public async Task<IActionResult> AddDoctor([FromBody] Doctor apnt)
+        public async Task<ActionResult<int>> AddDoctor([FromBody] AddDoctorView user)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var postId = await _intrface.AddDoctor(apnt);
+                    var postId =  await _intrface.AddDoctor(user);
                     if (postId > 0)
                     {
                         return Ok(postId);
@@ -81,18 +62,19 @@ namespace ClinicManagementSystem.Controllers
                 }
             }
             return BadRequest();
-        }
 
+           
+        }
 
         //Update Doctor
         [HttpPut]
-        public async Task<IActionResult> UpdDoctor([FromBody] Doctor apnt)
+        public async Task<IActionResult> UpdDoctor(AddDoctorView usr)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _intrface.UpdateDoctor(apnt);
+                    await _intrface.UpdDoctor(usr);
                     return Ok();
                 }
                 catch (Exception)
@@ -102,6 +84,14 @@ namespace ClinicManagementSystem.Controllers
             }
             return BadRequest();
         }
+
+        //Get Doctor By Id
+        [HttpGet("users/{Id}")]
+        public async Task<AddDoctorView> GetDoctorDetailsByUserID(int id)
+        {
+            return await _intrface.GetDoctorDetailsByUserID(id);
+        }
+
 
 
     }

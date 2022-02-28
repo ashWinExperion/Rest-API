@@ -20,12 +20,6 @@ namespace ClinicManagementSystem.Repository
 
         Task<Users> GetUserByUserNamePassword(string userName, string passWord);
 
-        Task<AddDoctorView> GetDoctorDetailsByUserID(int id);
-
-        Task<int> AddDoctor(AddDoctorView usr);
-
-        Task UpdDoctor(AddDoctorView usr);
-
         Task DisableUser(int id);
     }
 }
