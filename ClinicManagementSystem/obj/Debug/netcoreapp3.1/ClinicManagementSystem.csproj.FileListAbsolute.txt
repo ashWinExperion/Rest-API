@@ -113,3 +113,8 @@ E:\Important\Experion-Net-PK-RESTAPI\ClinicManagementSystem\bin\Debug\netcoreapp
 E:\Important\Experion-Net-PK-RESTAPI\ClinicManagementSystem\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 E:\Important\Experion-Net-PK-RESTAPI\ClinicManagementSystem\bin\Debug\netcoreapp3.1\EmailService.dll
 E:\Important\Experion-Net-PK-RESTAPI\ClinicManagementSystem\bin\Debug\netcoreapp3.1\EmailService.pdb
+E:\Important\Experion-Net-PK-RESTAPI\ClinicManagementSystem\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+E:\Important\Experion-Net-PK-RESTAPI\ClinicManagementSystem\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+E:\Important\Experion-Net-PK-RESTAPI\ClinicManagementSystem\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\Important\Experion-Net-PK-RESTAPI\ClinicManagementSystem\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\Important\Experion-Net-PK-RESTAPI\ClinicManagementSystem\obj\Debug\netcoreapp3.1\ClinicManagementSystem.MvcApplicationPartsAssemblyInfo.cs

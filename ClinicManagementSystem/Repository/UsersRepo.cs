@@ -66,7 +66,7 @@ namespace ClinicManagementSystem.Repository
         public async Task<Users> GetUserByUserNamePassword(string userName, string passWord)
         {
             return await (
-                _db.Users.Where(x => x.Password == passWord && x.UserName == userName)
+                _db.Users.Where(x => x.Password == passWord && x.UserName == userName & x.Status==1)
                 ).FirstOrDefaultAsync();
         }
 
